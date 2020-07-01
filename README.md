@@ -1,13 +1,20 @@
-ProducTimer - a timer made with React Native and styled-components API
+<h1>ProducTimer</h1>
+<h2>Timer web application made with React Native and styled-components API</h2>
 
-Functionalities so far:
--set/start/stop a timer
+<h3>Functionalities so far:</h3>
+<ul>
+  <li>set/start/stop a timer</li>
+</ul>
 
-Non-functional requirements:
--mobile friendly
+<h3>Non-functional requirements:</h3>
+<ul>
+  <li>mobile friendly</li>
+</ul>
 
-To do:
--add a done button for setting up the timer
--fix repetitive ticks
--possibility to add a title & description for a timer (only for registered users)
--components with registered users benefits
+<h3>To do:</h3>
+<ul>
+<li>add a done button for setting up the timer</li>
+<li>fix repetitive ticks</li>
+<li>possibility to add a title & description for a timer (only for registered users)</li>
+<li>components with registered users benefits</li>
+</ul>
