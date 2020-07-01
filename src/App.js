@@ -2,7 +2,7 @@ import React from 'react'
 import Timer from './Timer.js'
 import StartButton from './StartButton.js'
 import TimerInput from './TimerInput.js'
-import styled from 'styled-components';
+import NavigationBar from './NavigationBar'
 
 class App extends React.Component{
     constructor(props) {
@@ -14,7 +14,8 @@ class App extends React.Component{
             hours: "00",
             minutes: "00",
             seconds: "00",
-            isActive_timerInput: false
+            isActive_timerInput: false,
+            isTimerStarted: false
         }
 
         this.handleHourChange = this.handleHourChange.bind(this);
@@ -22,7 +23,7 @@ class App extends React.Component{
         this.handleSecondChange = this.handleSecondChange.bind(this);
 
         this.tick = this.tick.bind(this);
-        this.startCountdown = this.startCountdown.bind(this);
+        this.triggerCountdown = this.triggerCountdown.bind(this);
         this.showTimerInput = this.showTimerInput.bind(this);
     }
 
@@ -30,45 +31,51 @@ class App extends React.Component{
         /*Sets the state by modifying the hours
         Input: event (usually click)
         Output: -*/
-        var hrs = event.target.value;
-        if(hrs < 10){
-            hrs = "0" + hrs;
+        if(!this.state.isTimerStarted){
+            var hrs = event.target.value;
+            if(hrs < 10){
+                hrs = "0" + hrs;
+            }
+            if(hrs <= 9999){
+                this.setState({
+                    hours: hrs
+                })
+            }
         }
-        this.setState({
-            hours: hrs,
-            minutes: this.state.minutes,
-            seconds: this.state.seconds
-        })
     }
 
     handleMinuteChange(event){
         /*Sets the state by modifying the minutes
         Input: event (usually click)
         Output: -*/
-        var min = event.target.value;
-        if(min < 10){
-            min = "0" + min;
+        if(!this.state.isTimerStarted){
+            var min = event.target.value;
+            if(min < 10){
+                min = "0" + min;
+            }
+            if(min <= 59){
+                this.setState({
+                    minutes: min
+                })
+            }
         }
-        this.setState({
-            hours: this.state.hours,
-            minutes: min,
-            seconds: this.state.seconds
-        })
     }
 
     handleSecondChange(event){
         /*Sets the state by modifying the seconds
         Input: event (usually click)
         Output: -*/
-        var sec = event.target.value;
-        if(sec < 10){
-            sec = "0" + sec;
+        if(!this.state.isTimerStarted){
+            var sec = event.target.value;
+            if(sec < 10){
+                sec = "0" + sec;
+            }
+            if(sec <= 59){
+                this.setState({
+                    seconds: sec
+                })
+            }
         }
-        this.setState({
-            hours: this.state.hours,
-            minutes: this.state.minutes,
-            seconds: sec
-        })
     }
 
     tick() {
@@ -105,18 +112,36 @@ class App extends React.Component{
         }
         if (hrs === 0 && min === 0 & sec === 0) {
             clearInterval(this.intervalHandle);
+            this.setState({
+                isTimerStarted: false
+            });
         }
+        if(this.state.isTimerStarted){
             this.secondsRemaining--
+        }else{
+            clearInterval(this.intervalHandle);
         }
+    }
 
-    startCountdown(){
+    triggerCountdown(){
         /*Initialises the timer and starts the countdown
         Input: -
         Output: -*/
-        this.intervalHandle = setInterval(this.tick, 1000);
-        let secOfMin = this.state.minutes * 60;
-        let secOfHrs = this.state.hours * 3600;
-        this.secondsRemaining = Number(this.state.seconds) + secOfMin + secOfHrs;
+        if(this.state.isTimerStarted == false){//start the timer
+            if (!(this.state.hours === '00' && this.state.minutes === '00' & this.state.seconds === '00')) {
+                this.intervalHandle = setInterval(this.tick, 1000);
+                let secOfMin = this.state.minutes * 60;
+                let secOfHrs = this.state.hours * 3600;
+                this.secondsRemaining = Number(this.state.seconds) + secOfMin + secOfHrs;
+                this.setState({
+                    isTimerStarted: true
+                });
+            }
+        }else{//stop the timer
+            this.setState({
+                isTimerStarted: false
+            });
+        }
     }
 
     showTimerInput(){
@@ -131,12 +156,13 @@ class App extends React.Component{
     render(){
         return(
             <div>
-                <TimerInput hours={this.state.hours} minutes={this.state.minutes} seconds={this.state.seconds} handleHourChange={this.handleHourChange} handleMinuteChange={this.handleMinuteChange} handleSecondChange={this.handleSecondChange} isVisible={this.state.isActive_timerInput}/>
-                <Timer hours={this.state.hours} minutes={this.state.minutes} seconds={this.state.seconds}  showTimerInput={this.showTimerInput} />
-                <StartButton startCountdown={this.startCountdown} />
+                <NavigationBar />
+                <TimerInput hours={this.state.hours} minutes={this.state.minutes} seconds={this.state.seconds} handleHourChange={this.handleHourChange} handleMinuteChange={this.handleMinuteChange} handleSecondChange={this.handleSecondChange} isVisible={this.state.isActive_timerInput} showTimerInput={this.showTimerInput} isTimerStarted={this.state.isTimerStarted}/>
+                <Timer hours={this.state.hours} minutes={this.state.minutes} seconds={this.state.seconds} showTimerInput={this.showTimerInput} />
+                <StartButton triggerCountdown={this.triggerCountdown} isTimerStarted={this.state.isTimerStarted}/>
             </div>
         );
     }
 }
-
+//<NavigationBar />
 export default App

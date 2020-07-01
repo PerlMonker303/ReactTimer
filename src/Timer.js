@@ -1,10 +1,29 @@
 import React from 'react'
+import styled from 'styled-components';
+
+const Container = styled.div`
+    position: fixed;
+    left: 50%;
+    top: 30%;
+    margin-top: -50px;
+    margin-left: -95px;
+    font-size: 50px;
+    letter-spacing: 2px;
+    min-width: 160px;
+    text-align: center;
+    &:hover {
+        color: #8f5ca3;
+        text-decoration: none;
+        cursor: pointer;
+    }
+`;
 
 class Timer extends React.Component{
-
     render(){
         return(
-        <label onClick={this.props.showTimerInput}>{this.props.hours}:{this.props.minutes}:{this.props.seconds}</label>
+            <Container onClick={this.props.showTimerInput}>
+                {this.props.hours}:{this.props.minutes}:{this.props.seconds}
+            </Container>
         );
     }
 }

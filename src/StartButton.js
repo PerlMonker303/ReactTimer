@@ -2,9 +2,14 @@ import React from 'react'
 import styled from 'styled-components';
 
 const Button = styled.button`
+    position: fixed;
+    left: 50%;
+    top: 40%;
+    margin-top: -50px;
+    margin-left: -80px;
     line-height: 1;
     border-radius: 500px;
-    padding: 16px 48px 18px;
+    padding: 18px 48px 18px;
     -webkit-transition-property: background-color, border-color, color, -webkit-box-shadow, -webkit-filter;
     transition-property: background-color, border-color, color, -webkit-box-shadow, -webkit-filter;
     transition-property: background-color, border-color, color, box-shadow, filter;
@@ -17,6 +22,7 @@ const Button = styled.button`
     text-transform: uppercase;
     white-space: normal;
     color: #FFF;
+    cursor: pointer;
     background-color: ${props => props.bgColor};
     &:hover {
         background-color: ${props => props.bgHoverColor};
@@ -24,11 +30,14 @@ const Button = styled.button`
 `;
 
 class StartButton extends React.Component{
+
     render(){
         return(
-            <Button bgColor="#1DB954" bgHoverColor="#000000"
-                onClick={this.props.startCountdown}
-            >Start</Button>
+            <Button bgColor="#ff5c33" bgHoverColor="#e62e00"
+                onClick={this.props.triggerCountdown}
+        >
+            {this.props.isTimerStarted ? "Stop" : "Start"}
+        </Button>
         );
     }
 }
