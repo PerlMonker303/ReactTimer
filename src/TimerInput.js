@@ -34,9 +34,22 @@ const ContainerWrapper = styled.div`
     box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
 `;
 
+const ContainerTitle = styled.div`
+    position: relative;
+`;
+
+const Title = styled.span`
+    display: inline-block;
+    font-size: 28px;
+    font-weight: bold;
+`;
+
 const CloseButton = styled.span`
+    display: inline-block;
     color: black;
-    float: right;
+    position: absolute;
+    top: -20px;
+    right: 0px;
     font-size: 28px;
     font-weight: bold;
     user-select: none;
@@ -46,6 +59,8 @@ const CloseButton = styled.span`
         cursor: pointer;
     }
 `;
+
+
 
 const Message = styled.p`
     visibility: ${props => props.isTimerStarted ? "visible" : "hidden"};
@@ -108,8 +123,10 @@ class TimerInput extends React.Component{
         return(
             <Overlay isVisible={isVisible}>
                 <ContainerWrapper>
-                    <CloseButton onClick={showTimerInput}>&times;</CloseButton>
-                    <h2>Edit Timer</h2>
+                    <ContainerTitle>
+                        <CloseButton onClick={showTimerInput}>&times;</CloseButton>
+                        <Title>Edit Timer</Title>
+                    </ContainerTitle>
                     <Message isTimerStarted={isTimerStarted}>Timer is running</Message>
                     <Block>
                         <label>Hours</label>

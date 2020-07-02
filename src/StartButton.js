@@ -2,11 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 
 const Button = styled.button`
-    position: fixed;
-    left: 50%;
-    top: 40%;
-    margin-top: -50px;
-    margin-left: -80px;
+    text-align: center;
     line-height: 1;
     border-radius: 500px;
     padding: 18px 48px 18px;
@@ -35,9 +31,9 @@ class StartButton extends React.Component{
         return(
             <Button bgColor="#ff5c33" bgHoverColor="#e62e00"
                 onClick={this.props.triggerCountdown}
-        >
-            {this.props.isTimerStarted ? "Stop" : "Start"}
-        </Button>
+            >
+                {this.props.isTimerStarted ? "Stop" : "Start"}
+            </Button>
         );
     }
 }

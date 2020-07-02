@@ -13,7 +13,7 @@
 
 <h3>To do:</h3>
 <ul>
-<li>Refactor everything to allow more Timers</li>
+<li>add a new timer functionality</li>
 <li>possibility to add a title & description for a timer (only for registered users)</li>
 <li>components with registered users benefits</li>
 </ul>
