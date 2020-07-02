@@ -12,7 +12,7 @@ const Container = styled.div`
     min-width: 160px;
     text-align: center;
     &:hover {
-        color: #8f5ca3;
+        color: navy;
         text-decoration: none;
         cursor: pointer;
     }

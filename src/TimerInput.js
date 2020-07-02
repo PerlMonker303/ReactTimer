@@ -23,7 +23,7 @@ const Overlay = styled.div`
 const ContainerWrapper = styled.div`
     cursor: auto;
     text-align: center;
-    padding: 1.2em;
+    padding: 1.1em 1.2em;
     border: 1px solid #888;
     width: 70%;
     margin: 15% auto;
@@ -32,10 +32,6 @@ const ContainerWrapper = styled.div`
     font-family: "Segoe UI",Arial,sans-serif;
     font-size: 18px;
     box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
-`;
-
-const Title = styled.h2`
-    
 `;
 
 const CloseButton = styled.span`
@@ -63,7 +59,7 @@ const Block = styled.div`
     font-size: 20px;
     position: relative;
     display: inline-block;
-    width: 90px;
+    width: 97px;
 `;
 
 const StyledInput = styled.input`
@@ -75,28 +71,61 @@ const StyledInput = styled.input`
     max-width: 60px;
 `;
 
+const ContainerButtonDone = styled.div`
+    position: relative;
+    width: 100%;
+    height: 30px;
+    display: block;
+    margin-top: 15px;
+`;
+
+const ButtonDone = styled.button`
+    -webkit-transition-property: background-color, border-color, color, -webkit-box-shadow, -webkit-filter;
+    transition-property: background-color, border-color, color, -webkit-box-shadow, -webkit-filter;
+    transition-property: background-color, border-color, color, box-shadow, filter;
+    transition-property: background-color, border-color, color, box-shadow, filter, -webkit-box-shadow, -webkit-filter;
+    -webkit-transition-duration: .3s;
+    transition-duration: .3s;
+    border-width: 0;
+    padding: 6px 12px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    background-color: ${props => props.bgColor};
+    &:hover {
+        background-color: ${props => props.bgHoverColor};
+    }
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    cursor: pointer;
+`;
+
 class TimerInput extends React.Component{
     render(){
-        const {hours,minutes,seconds,handleHourChange, handleMinuteChange, handleSecondChange, isVisible, showTimerInput, isTimerStarted} = this.props;
+        const {hours,minutes,seconds,handleHourChange, handleMinuteChange, handleSecondChange, isVisible, showTimerInput, isTimerStarted, handleHourClicked, handleMinuteClicked, handleSecondClicked} = this.props;
 
         return(
             <Overlay isVisible={isVisible}>
                 <ContainerWrapper>
                     <CloseButton onClick={showTimerInput}>&times;</CloseButton>
-                    <Title>Edit Timer</Title>
+                    <h2>Edit Timer</h2>
                     <Message isTimerStarted={isTimerStarted}>Timer is running</Message>
                     <Block>
                         <label>Hours</label>
-                        <StyledInput type="number" min="0" max="9999" hours={hours} onChange={handleHourChange} value={hours} required></StyledInput>
+                        <StyledInput type="number" min="0" max="9999" hours={hours} onChange={handleHourChange} onClick={handleHourClicked} value={hours} required></StyledInput>
                     </Block>
                     <Block>
                         <label>Minutes</label>
-                        <StyledInput type="number" min="0" max="59" minutes={minutes} onChange={handleMinuteChange} value={minutes} required></StyledInput>
+                        <StyledInput type="number" min="0" max="59" minutes={minutes} onChange={handleMinuteChange} onClick={handleMinuteClicked} value={minutes} required></StyledInput>
                     </Block>
                     <Block>
                         <label>Seconds</label>
-                        <StyledInput type="number" min="0" max="59" seconds={seconds} onChange={handleSecondChange} value={seconds} required></StyledInput>
+                        <StyledInput type="number" min="0" max="59" seconds={seconds} onChange={handleSecondChange} onClick={handleSecondClicked} value={seconds} required></StyledInput>
                     </Block>
+                    <ContainerButtonDone>
+                        <ButtonDone bgColor="#29a329" bgHoverColor="black" onClick={showTimerInput}>Done</ButtonDone>
+                    </ContainerButtonDone>
                 </ContainerWrapper>
             </Overlay>
         );
