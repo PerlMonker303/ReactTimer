@@ -7,11 +7,34 @@ const Container = styled.div`
     min-width: 160px;
     display: block;
     border-style: solid;
-    border-radius: 10px;
     margin: auto;
     margin-bottom: 30px;
     width: 70%;
     padding: 8px 0px;
+    box-shadow: 3px 3px 1px 2px #888888;
+    position: relative;
+`;
+
+const DeleteButton = styled.button`
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    -webkit-transition-property: background-color, border-color, color, -webkit-box-shadow, -webkit-filter;
+    transition-property: background-color, border-color, color, -webkit-box-shadow, -webkit-filter;
+    transition-property: background-color, border-color, color, box-shadow, filter;
+    transition-property: background-color, border-color, color, box-shadow, filter, -webkit-box-shadow, -webkit-filter;
+    -webkit-transition-duration: .3s;
+    transition-duration: .3s;
+    border-width: 0;
+    cursor: pointer;
+    background-color: ${props => props.bgColor};
+    &:hover {
+        background-color: ${props => props.bgHoverColor};
+        color: black;
+    }
+    padding: 2px 6px;
+    border-radius: 2px;
+    color: white;
 `;
 
 const Digits = styled.div`
@@ -42,7 +65,8 @@ class Timer extends React.Component{
             minutes: "00",
             seconds: "00",
             isActive_timerInput: false,
-            isTimerStarted: false
+            isTimerStarted: false,
+            id : this.props.id
         }
         this.handleHourChange = this.handleHourChange.bind(this);
         this.handleMinuteChange = this.handleMinuteChange.bind(this);
@@ -68,7 +92,7 @@ class Timer extends React.Component{
             }
             else if(hrs === "0"){
                 this.setState({
-                    hours: ""
+                    hours: "",
                 });
                 return;
             }
@@ -77,7 +101,7 @@ class Timer extends React.Component{
             }
             if(hrs <= 9999){
                 this.setState({
-                    hours: hrs
+                    hours: hrs,
                 })
             }
         }
@@ -94,7 +118,7 @@ class Timer extends React.Component{
             }
             else if(min === "0"){
                 this.setState({
-                    minutes: ""
+                    minutes: "",
                 });
                 return;
             }
@@ -103,7 +127,7 @@ class Timer extends React.Component{
             }
             if(min <= 9999){
                 this.setState({
-                    minutes: min
+                    minutes: min,
                 })
             }
         }
@@ -119,7 +143,7 @@ class Timer extends React.Component{
                 sec = "0" + sec;
             }else if(sec === "0"){
                 this.setState({
-                    seconds: ""
+                    seconds: "",
                 });
                 return;
             }
@@ -128,7 +152,7 @@ class Timer extends React.Component{
             }
             if(sec <= 59){
                 this.setState({
-                    seconds: sec
+                    seconds: sec,
                 })
             }
         }
@@ -146,42 +170,35 @@ class Timer extends React.Component{
                 var hrs = Math.floor(this.secondsRemaining / 3600);
                 var min = Math.floor((this.secondsRemaining - hrs*3600) / 60);
                 var sec = Math.floor(this.secondsRemaining % 60);
-                /*
-                console.log(this.secondsRemaining);
-                console.log(hrs);
-                console.log(min);
-                console.log(sec);
-                */
                 this.setState({
                     hours: hrs,
                     minutes: min,
-                    seconds: sec
+                    seconds: sec,
                 })
                 if (sec < 10) {
                     this.setState({
-                        seconds: "0" + this.state.seconds
+                        seconds: "0" + this.state.seconds,
                     })
                 }
                 if (min < 10) {
                     this.setState({
-                        minutes: "0" + min
+                        minutes: "0" + min,
                     })
                 }
                 if(hrs < 10){
                     this.setState({
-                        hours: "0" + hrs
+                        hours: "0" + hrs,
                     })
                 }
                 if (hrs === 0 && min === 0 & sec === 0) {
                     clearInterval(this.intervalHandle);
                     this.setState({
-                        isTimerStarted: false
+                        isTimerStarted: false,
                     });
                 }else{
                     this.milisecondsRemaining = 9;
                 }
             }else{
-                //console.log(this.milisecondsRemaining);
                 this.milisecondsRemaining--;
             }
         }
@@ -199,13 +216,13 @@ class Timer extends React.Component{
                 this.secondsRemaining = Number(this.state.seconds) + secOfMin + secOfHrs;
                 
                 this.setState({
-                    isTimerStarted: true
+                    isTimerStarted: true,
                 });
             }
         }else{//stop the timer
             clearInterval(this.intervalHandle);
             this.setState({
-                isTimerStarted: false
+                isTimerStarted: false,
             });
         }
     }
@@ -217,29 +234,29 @@ class Timer extends React.Component{
         if(this.state.isActive_timerInput){
             if(this.state.hours === ""){
                 this.setState({
-                    hours: "00"
+                    hours: "00",
                 });
             }
         }
         this.setState({
-            isActive_timerInput: !this.state.isActive_timerInput
+            isActive_timerInput: !this.state.isActive_timerInput,
         })
     }
     
     handleHourClicked(){
         if(this.state.hours === "00"){
             this.setState({
-                hours: ""
+                hours: "",
             });
         }
         if(this.state.minutes === ""){
             this.setState({
-                minutes: "00"
+                minutes: "00",
             });
         }
         if(this.state.seconds === ""){
             this.setState({
-                seconds: "00"
+                seconds: "00",
             });
         }
     }
@@ -247,17 +264,17 @@ class Timer extends React.Component{
     handleMinuteClicked(){
         if(this.state.hours === ""){
             this.setState({
-                hours: "00"
+                hours: "00",
             });
         }
         if(this.state.minutes === "00"){
             this.setState({
-                minutes: ""
+                minutes: "",
             });
         }
         if(this.state.seconds === ""){
             this.setState({
-                seconds: "00"
+                seconds: "00",
             });
         }
     }
@@ -265,17 +282,17 @@ class Timer extends React.Component{
     handleSecondClicked(){
         if(this.state.hours === ""){
             this.setState({
-                hours: "00"
+                hours: "00",
             });
         }
         if(this.state.minutes === ""){
             this.setState({
-                minutes: "00"
+                minutes: "00",
             });
         }
         if(this.state.seconds === "00"){
             this.setState({
-                seconds: ""
+                seconds: "",
             });
         }
     }
@@ -297,6 +314,7 @@ class Timer extends React.Component{
                     handleMinuteClicked={this.handleMinuteClicked}
                     handleSecondClicked={this.handleSecondClicked}
                 />
+                <DeleteButton onClick={() => this.props.delete(this.state.id)} bgColor="red" bgHoverColor="green">X</DeleteButton>
                 <Digits onClick={this.showTimerInput}>
                     {this.state.hours}:{this.state.minutes}:{this.state.seconds}
                 </Digits>

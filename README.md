@@ -4,16 +4,10 @@
 <h3>Functionalities so far:</h3>
 <ul>
   <li>set/start/stop a timer</li>
+  <li>add and remove timers</li>
 </ul>
 
 <h3>Non-functional requirements:</h3>
 <ul>
   <li>mobile friendly</li>
-</ul>
-
-<h3>To do:</h3>
-<ul>
-<li>add a new timer functionality</li>
-<li>possibility to add a title & description for a timer (only for registered users)</li>
-<li>components with registered users benefits</li>
 </ul>

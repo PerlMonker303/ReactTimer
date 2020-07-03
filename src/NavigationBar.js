@@ -37,23 +37,21 @@ const NavButton = styled.button`
     font-size: 20px;
     &:hover {
         background-color: navy;
+        cursor: pointer;
     }
 `;
 
-class NavigationBar extends React.Component{
-    render(){
-        return(
-            <NavBar>
-                <NavSubBarLeft>
-                    <NavButton>ProducTimer</NavButton>
-                </NavSubBarLeft>
-                <NavSubBarRight>
-                    <NavButton>Sign up</NavButton>
-                    <NavButton>Log in</NavButton>
-                </NavSubBarRight>
-            </NavBar>
-        );
-    }
+const navigationBar = (props) => {
+    return(
+        <NavBar>
+            <NavSubBarLeft>
+                <NavButton>ProducTimer</NavButton>
+            </NavSubBarLeft>
+            <NavSubBarRight>
+                <NavButton onClick={props.clicked}>Add timer</NavButton>
+            </NavSubBarRight>
+        </NavBar>
+    );
 }
 
-export default NavigationBar
+export default navigationBar
