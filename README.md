@@ -1,5 +1,5 @@
 <h1>ProducTimer</h1>
-<h2>Timer web application made with React Native and styled-components API</h2>
+<h2>Timer web application made with React and Styled-components library</h2>
 
 <h3>Functionalities so far:</h3>
 <ul>
