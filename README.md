@@ -14,8 +14,8 @@
 
 <h2>Screenshots</h2>
 
-![Test Image 1](showcase1.png)
+![Image 1](./screenshots/showcase1.png)
 
-![Test Image 1](showcase2.png)
+![Image 2](./screenshots/showcase2.png)
 
-![Test Image 1](showcase3.png)
+![Image 3](./screenshots/showcase3.png)
