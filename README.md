@@ -11,3 +11,11 @@
 <ul>
   <li>mobile friendly</li>
 </ul>
+
+<h2>Screenshots</h2>
+
+![Test Image 1](showcase1.png)
+
+![Test Image 1](showcase2.png)
+
+![Test Image 1](showcase3.png)
